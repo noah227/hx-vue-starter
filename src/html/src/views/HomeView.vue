@@ -47,11 +47,14 @@ const displayErrorMessage = () => {
 }
 
 onMounted(() => {
-    // registerDocumentKeyEvents()
     nextTick(() => {
         window.addEventListener('hbuilderxReady', () => {
             initMessage()
-            fetchContent()
+            // 等待window.postMessageToHX初始化完成，不然会报错
+            // 这种写法可以用于webview窗口打开时的初始数据交换
+            setTimeout(() => {
+                fetchContent()
+            }, 0)
         })
     })
 })
