@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <div v-if="env.envInfo.htmlRoot" class="home">
         <button @click="fetchContent">通信：点击获取选择的内容</button>
         <button @click="displayErrorMessage">通信：在窗体上显示错误信息</button>
         <router-link to="/about">路由跳转：点我跳转到about</router-link>
@@ -10,11 +10,11 @@
 <script lang="ts" setup>
 import {getHBuilderX} from "@/hx"
 import {computed, nextTick, onMounted} from "vue";
-import {useEnvInfo} from "@/pinia/env";
+import {useEnv} from "@/pinia/env";
 
-const envInfo = useEnvInfo()
+const env = useEnv()
 const rImg2 = computed(() => {
-    return [envInfo.envInfo.htmlRoot, "public/images/22234.jpg"].join("/")
+    return env.renderPath("public/images/22234.jpg")
 })
 
 /** HBuilderX **/
@@ -32,7 +32,7 @@ const initMessage = () => {
         } else {
             switch (msg.command) {
                 case "resInitEnvInfo":
-                    envInfo.updateEnvInfo(msg.data)
+                    env.updateEnvInfo(msg.data)
                     break
                 case "resFetchContent":
                     alert(msg.data)
