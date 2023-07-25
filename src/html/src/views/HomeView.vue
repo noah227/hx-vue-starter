@@ -49,11 +49,12 @@ const displayErrorMessage = () => {
 onMounted(() => {
     nextTick(() => {
         window.addEventListener('hbuilderxReady', () => {
+            // 初始化通信监听
             initMessage()
-            // 等待window.postMessageToHX初始化完成，不然会报错
-            // 这种写法可以用于webview窗口打开时的初始数据交换
+            // 如果需要在webview窗口打开时进行数据交换，可以这样做
             setTimeout(() => {
-                fetchContent()
+                // 这个时候的window.postMessageToHX是已经初始化完成了的
+                // fetchContent()
             }, 0)
         })
     })
