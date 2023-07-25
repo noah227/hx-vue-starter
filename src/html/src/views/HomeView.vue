@@ -3,12 +3,19 @@
         <button @click="fetchContent">通信：点击获取选择的内容</button>
         <button @click="displayErrorMessage">通信：在窗体上显示错误信息</button>
         <router-link to="/about">路由跳转：点我跳转到about</router-link>
+        <img :src="rImg2" style="width: 100px" alt="">
     </div>
 </template>
 
 <script lang="ts" setup>
-import {getHBuilderX} from "@/hx/index"
-import {onMounted, nextTick} from "vue";
+import {getHBuilderX} from "@/hx"
+import {computed, nextTick, onMounted} from "vue";
+import {useEnvInfo} from "@/pinia/env";
+
+const envInfo = useEnvInfo()
+const rImg2 = computed(() => {
+    return [envInfo.envInfo.htmlRoot, "public/images/22234.jpg"].join("/")
+})
 
 /** HBuilderX **/
 const initMessage = () => {
@@ -24,11 +31,20 @@ const initMessage = () => {
             }
         } else {
             switch (msg.command) {
+                case "resInitEnvInfo":
+                    envInfo.updateEnvInfo(msg.data)
+                    break
                 case "resFetchContent":
                     alert(msg.data)
                     break
             }
         }
+    })
+}
+
+const initEnvInfo = () => {
+    getHBuilderX().postMessage({
+        command: "initEnvInfo"
     })
 }
 
@@ -54,7 +70,7 @@ onMounted(() => {
             // 如果需要在webview窗口打开时进行数据交换，可以这样做
             setTimeout(() => {
                 // 这个时候的window.postMessageToHX是已经初始化完成了的
-                // fetchContent()
+                initEnvInfo()
             }, 0)
         })
     })

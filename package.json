@@ -3,7 +3,7 @@
 	"name": "hx-vue-starter",
 	"description": "Use vue in your hbx plugin's development",
 	"displayName": "hx-vue-starter",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"publisher": "your name",
 	"engines": {
 		"HBuilderX": "^2.7.0"
@@ -39,6 +39,6 @@
 		"plugin-manager"
 	],
 	"dependencies": {
-		"hx-vue-dist-loader": "^1.0.5"
+		"hx-vue-dist-loader": "^1.2.0"
 	}
 }

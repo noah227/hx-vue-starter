@@ -1,5 +1,6 @@
 const hx = require("hbuilderx")
 const Html = require('./html.js')
+const path = require("path")
 
 const showView = () => {
 	/**
@@ -32,6 +33,14 @@ const showView = () => {
 			case "close":
 				dialog.close()
 				break
+            case "initEnvInfo":
+            	webview.postMessage({
+            		command: "resInitEnvInfo",
+            		data: {
+            	        htmlRoot: path.resolve(__dirname, "html").replaceAll(/\\/g, "/")
+            	    }
+            	})
+            	break
 			case "fetchContent":
 				hx.window.getActiveTextEditor().then(editor => {
 					const text = editor.document.getText(editor.selection)
@@ -46,8 +55,8 @@ const showView = () => {
 				// 官方dialog.displayError未提供timeout参数，所以这里进行了手动消除
 				setTimeout(() => {
 					dialog.displayError("")
-				}, data.timeout || 3000) 
-				break		
+				}, data.timeout || 3000)
+				break
 			default:
 				break
 		}
