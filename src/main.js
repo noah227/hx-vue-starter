@@ -1,6 +1,7 @@
 const hx = require("hbuilderx")
 const Html = require('./html.js')
 const path = require("path")
+const utils = require("./utils.js")
 
 const showView = () => {
 	/**
@@ -37,7 +38,8 @@ const showView = () => {
             	webview.postMessage({
             		command: "resInitEnvInfo",
             		data: {
-            	        htmlRoot: path.resolve(__dirname, "html").replaceAll(/\\/g, "/")
+            	        htmlRoot: path.resolve(__dirname, "html").replaceAll(/\\/g, "/"),
+                        configuration: utils.getConfiguration()
             	    }
             	})
             	break
@@ -61,10 +63,20 @@ const showView = () => {
 				break
 		}
 	})
+    
+    /* 监听配置变动，同步更新配置信息 */
+    hx.workspace.onDidChangeConfiguration(e => {
+        webview.postMessage({
+        	command: "resUpdateConfiguration",
+        	data: utils.getConfiguration()
+        })
+    })
+    
 	// 显示对话框，返回显示成功或者失败的信息，主要包含内置浏览器相关状态。
 	dialog.show().then((data) => {
 		// 这里不要直接调用webview.postMessage，发不过去的
 	})
+    
     // 关闭事件
     dialog.onDialogClosed(disposable => {
         hx.window.setStatusBarMessage(`webview dialog窗口已关闭 | ${Date.now()}`, 3000)

@@ -34,6 +34,9 @@ const initMessage = () => {
                 case "resInitEnvInfo":
                     env.updateEnvInfo(msg.data)
                     break
+                case "resUpdateConfiguration":
+                    env.updateConfiguration(msg.data)
+                    break
                 case "resFetchContent":
                     alert(msg.data)
                     break
