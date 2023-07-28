@@ -12,6 +12,9 @@
 		"Other"
 	],
 	"main": "./extension",
+	"scripts": {
+		"pack": "node hx-pack.js"
+	},
 	"activationEvents": [
 		"onCommand:extension.showView"
 	],
@@ -40,5 +43,8 @@
 	],
 	"dependencies": {
 		"hx-vue-dist-loader": "^1.2.0"
+	},
+	"devDependencies": {
+		"cozip": "^0.0.8-beta"
 	}
 }
