@@ -21,6 +21,7 @@ const rImg2 = computed(() => {
 const initMessage = () => {
     // 事件处理
     getHBuilderX().onDidReceiveMessage((msg: any) => {
+        console.log("Web页面接收到消息：", msg)
         // 这里接收的是dialog创建配置的button被触发的事件
         if (msg.type == 'DialogButtonEvent') {
             let button = msg.button
@@ -29,7 +30,9 @@ const initMessage = () => {
                     command: "close"
                 })
             }
-        } else {
+        }
+        // 数据通信
+        else {
             switch (msg.command) {
                 case "resInitEnvInfo":
                     env.updateEnvInfo(msg.data)
@@ -45,18 +48,27 @@ const initMessage = () => {
     })
 }
 
+/**
+ * 通信：获取envInfo，主要用来解决页面中静态资源的渲染问题
+ */
 const initEnvInfo = () => {
     getHBuilderX().postMessage({
         command: "initEnvInfo"
     })
 }
 
+/**
+ * 示例通信：获取编辑器中选择的文本
+ */
 const fetchContent = () => {
     getHBuilderX().postMessage({
         command: "fetchContent"
     })
 }
 
+/**
+ * 通信：在窗体上显示错误信息
+ */
 const displayErrorMessage = () => {
     getHBuilderX().postMessage({
         command: "displayError",
@@ -67,6 +79,7 @@ const displayErrorMessage = () => {
 
 onMounted(() => {
     nextTick(() => {
+        // hbx ready之后进行初始化操作
         window.addEventListener('hbuilderxReady', () => {
             // 初始化通信监听
             initMessage()
