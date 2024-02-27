@@ -3,7 +3,7 @@ const Html = require('./html.js')
 const path = require("path")
 const utils = require("./utils.js")
 
-const showView = () => {
+const _showView = () => {
 	/**
 	 * @see [createwebviewdialog](https://hx.dcloud.net.cn/ExtensionDocs/Api/windows/createWebViewDialog)
 	 */
@@ -84,5 +84,15 @@ const showView = () => {
 }
 
 module.exports = {
-	showView
+    /**
+     * @param {Object} context 不同地方触发有着不同的数据
+     */
+	showView(context){
+        try{
+            _showView()
+        }
+        catch(e){
+            console.error(e)
+        }
+    }
 }
