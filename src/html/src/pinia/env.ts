@@ -2,12 +2,13 @@ import {defineStore} from "pinia";
 import {ref} from "vue";
 
 
+// 对应HBuilderX的hx.workspace.getConfiguration get获取的数据
 type TConfiguration = {
     colorScheme: string
 }
 
 export type TEnvInfo = {
-    // 运行时的html根路径，路径中包含正斜杠，结尾不包含斜杠
+    // 运行时的html根路径，路径中包含正斜杠，结尾不包含斜杠；主要是用来处理静态资源的
     htmlRoot: string
     configuration: TConfiguration
 }
