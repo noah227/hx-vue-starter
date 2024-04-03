@@ -42,7 +42,7 @@
 		"plugin-manager"
 	],
 	"dependencies": {
-		"hx-vue-dist-loader": "^1.2.0"
+		"hx-vue-dist-loader": "^1.2.2"
 	},
 	"devDependencies": {
 		"cozip": "^0.1.0"
