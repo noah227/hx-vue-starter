@@ -12,9 +12,17 @@
 
 ## 发行
 
-插件最终发行到 [HBuilderX插件市场](https://ext.dcloud.net.cn/?cat1=1&type=HotList#) 时需要打包成压缩包，本项目预置使用了 [cozip]() 进行了一个简要的打包。
-如果有在runtime必须的node_modules依赖，在`./hx-pack.js`里相关位置进行添加，或者选用其他打包方案
+* 插件最终发行到 [HBuilderX插件市场](https://ext.dcloud.net.cn/?cat1=1&type=HotList#) 时需要打包成压缩包，本项目预置使用了 [cozip]() 进行了一个简要的打包。
+* 如果有在runtime必须的node_modules依赖，在`./hx-pack.js`里相关位置进行添加，或者选用其他打包方案
 
 ## 其他
 
 关于Vue编写部分的注意事项，详见
+
+### 关于dialog尺寸与webview尺寸
+
+* 左右边距40px
+* 上边距99px
+* 下边距73px
+* 上下边距跟dialog是否设置了description、是否展示message没有关系
+* `hx.window.createWebViewDialog` 的size就是dialog的整体size

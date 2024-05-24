@@ -12,6 +12,7 @@ const _showView = () => {
 		title: "Hello",
 		description: "这是一个使用vue在HBuilderX插件中构建可视化界面的示例",
 		dialogButtons: ["关闭"],
+        // 有关尺寸的说明，见README中 关于dialog尺寸与webview尺寸 的相关介绍
 		size: {
 			width: 720,
 			height: 520
