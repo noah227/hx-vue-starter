@@ -21,6 +21,13 @@
 
 ## 其他
 
+## 关于教程
+
+* 官方有教程
+    * [粗略示例与开发指南](https://hx.dcloud.net.cn/ExtensionTutorial/README)
+    * [较为详细的api部分](https://hx.dcloud.net.cn/ExtensionDocs/Api/README)
+* 当然，教程中有些还是不够详细，官方另外有示例项目，见 [hbuilderx-extension-samples](https://github.com/dcloudio/hbuilderx-extension-samples)
+
 关于Vue编写部分的注意事项，详见
 
 ### 关于主题适配
@@ -34,3 +41,8 @@
 * 下边距73px
 * 上下边距跟dialog是否设置了description、是否展示message没有关系
 * `hx.window.createWebViewDialog` 的size就是dialog的整体size
+
+### 关于配置的获取与保存
+
+* 配置项并不一定要直接写在package.json的contributes.configuration里，就目前而言，写不写，代码内关于config的get和update接口都是有效的
+* 区别就在于，写在package.json里面的，用户可以在设置界面看到并进行配置
