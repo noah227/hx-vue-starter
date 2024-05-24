@@ -4,6 +4,7 @@
         <button @click="displayErrorMessage">通信：在窗体上显示错误信息</button>
         <router-link to="/about">路由跳转：点我跳转到about</router-link>
         <img :src="rImg2" style="width: 100px" alt="">
+        <input type="text" style="width: 100%" placeholder="dialog的webview似乎不能自动获取焦点, 所以这里设置autofocus和手动focus都没用"/>
     </div>
 </template>
 
@@ -98,7 +99,7 @@ const syncConfig = (data: { [index: string]: any }) => {
             command: "syncConfig",
             data
         })
-    }, 200)
+    }, 200) as any
 }
 
 onMounted(() => {
