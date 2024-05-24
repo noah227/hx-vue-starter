@@ -1,5 +1,5 @@
 <template>
-    <div v-if="env.envInfo.htmlRoot" class="home">
+    <div v-if="readyToRender && env.envInfo.htmlRoot" class="home">
         <button @click="fetchContent">通信：点击获取选择的内容</button>
         <button @click="displayErrorMessage">通信：在窗体上显示错误信息</button>
         <router-link to="/about">路由跳转：点我跳转到about</router-link>
@@ -9,13 +9,18 @@
 
 <script lang="ts" setup>
 import {getHBuilderX} from "@/hx"
-import {computed, nextTick, onMounted} from "vue";
+import {computed, nextTick, onMounted, ref} from "vue";
 import {useEnv} from "@/pinia/env";
 
 const env = useEnv()
 const rImg2 = computed(() => {
     return env.renderPath("public/images/22234.jpg")
+    // 如果设置了__webpack_public_path__，可以这么写
+    // return require("/public/images/22234.jpg")
 })
+
+// 没什么特殊需要的话，这玩意儿也可以默认为true
+const readyToRender = ref(false)
 
 /** HBuilderX **/
 const initMessage = () => {
@@ -36,6 +41,8 @@ const initMessage = () => {
             switch (msg.command) {
                 case "resInitEnvInfo":
                     env.updateEnvInfo(msg.data)
+                    // __webpack_public_path__ = `${env.envInfo.htmlRoot}/dist/`
+                    readyToRender.value = true
                     break
                 case "resUpdateConfiguration":
                     env.updateConfiguration(msg.data)

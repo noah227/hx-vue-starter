@@ -61,6 +61,13 @@ const _showView = () => {
             			dialog.displayError("")
             		}, data.timeout || 3000)
             		break
+                // 同步保存配置
+                case "syncConfig":
+                    utils.updateConfiguration(data)
+                    webview.postMessage({
+                    	command: "resSyncConfig",
+                    	data: "配置已保存"
+                    })
             	default:
             		break
             }

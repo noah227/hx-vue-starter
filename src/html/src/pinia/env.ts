@@ -37,7 +37,10 @@ export const useEnv = defineStore("pinia", () => {
         envInfo.value.configuration = {...envInfo.value.configuration, ...config}
     }
     /**
+     * 
      * 处理运行时的资源文件地址
+     * 
+     * 如果处理了publicPath（__webpack_public_path__），那这个就是不需要的了
      * @param path 相对路径
      */
     const renderPath = (path: string) => {
