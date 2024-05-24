@@ -29,6 +29,7 @@ const _showView = () => {
 	webview.onDidReceiveMessage((msg) => {
 		let action = msg.command
 		let data = msg.data
+        let displayErrorTid = 0
         try {
             // 自定义处理
             switch (action) {
@@ -57,7 +58,8 @@ const _showView = () => {
             	case "displayError":
             		dialog.displayError(data)
             		// 官方dialog.displayError未提供timeout参数，所以这里进行了手动消除
-            		setTimeout(() => {
+                    displayErrorTid && clearTimeout(displayErrorTid)
+            		displayErrorTid = setTimeout(() => {
             			dialog.displayError("")
             		}, data.timeout || 3000)
             		break
