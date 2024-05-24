@@ -17,19 +17,19 @@
 		"pack": "node hx-pack.js"
 	},
 	"activationEvents": [
-		"onCommand:extension.showView"
+		"onCommand:hx-vue-starter.showView"
 	],
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.showView",
+				"command": "hx-vue-starter.showView",
 				"title": "Show View"
 			}
 		],
 		"menus": {
 			"editor/context": [
 				{
-					"command": "extension.showView",
+					"command": "hx-vue-starter.showView",
 					"group": "z_commands",
 					"when": "editorTextFocus"
 				},
