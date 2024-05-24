@@ -103,9 +103,12 @@ const syncConfig = (data: { [index: string]: any }) => {
 }
 
 onMounted(() => {
+    // 这个判定很重要，在readyToRender默认设为false的话，必须处理
+    if (env.envInfo.hxReady) return (readyToRender.value = true)
     nextTick(() => {
         // hbx ready之后进行初始化操作
         window.addEventListener('hbuilderxReady', () => {
+            env.updateEnvInfo({hxReady: true})
             // 初始化通信监听
             initMessage()
             // 如果需要在webview窗口打开时进行数据交换，可以这样做
