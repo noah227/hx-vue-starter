@@ -50,6 +50,9 @@ const initMessage = () => {
                 case "resFetchContent":
                     alert(msg.data)
                     break
+                case "resSyncConfig":
+                    // 如有需要，在这里处理配置同步的回调通信
+                    break
             }
         }
     })
@@ -82,6 +85,20 @@ const displayErrorMessage = () => {
         data: "随机信息：" + Math.random().toString(32).slice(2).toUpperCase(),
         timeout: 3000
     })
+}
+
+const syncTid = ref(0)
+/**
+ * 同步配置，运行时有什么需要同步保存到插件配置的，都可以从这里进行
+ */
+const syncConfig = (data: { [index: string]: any }) => {
+    syncTid.value && clearTimeout(syncTid.value)
+    syncTid.value = setTimeout(() => {
+        getHBuilderX().postMessage({
+            command: "syncConfig",
+            data
+        })
+    }, 200)
 }
 
 onMounted(() => {
