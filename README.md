@@ -2,7 +2,7 @@
 
 一个使用vue的HBuilderX插件基础示例
 
-## 使用场景
+## 适用场景
 
 构建可视化界面，比如`hx.window.createWebViewDialog`。框架式编写，开发更高效！维护更方便！
 
@@ -21,7 +21,7 @@
 
 ## 其他
 
-## 关于教程
+### 关于教程
 
 * 官方有教程
     * [粗略示例与开发指南](https://hx.dcloud.net.cn/ExtensionTutorial/README)
