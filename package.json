@@ -47,6 +47,6 @@
 		"hx-vue-dist-loader": "^1.2.5"
 	},
 	"devDependencies": {
-		"cozip": "^0.1.0"
+		"cozip": "^0.1.1"
 	}
 }
