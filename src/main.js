@@ -1,7 +1,8 @@
 const hx = require("hbuilderx")
 const Html = require('./html.js')
-const path = require("path")
 const utils = require("./utils.js")
+const {processMessage} = require("./main.message.js")
+const changeCase = require("change-case-commonjs")
 
 const _showView = () => {
 	/**
@@ -25,35 +26,17 @@ const _showView = () => {
 	// 加载html内容
 	webview.html = Html()
 
+    let displayErrorTid = 0
 	// 注册事件，用于通信
 	webview.onDidReceiveMessage((msg) => {
 		let action = msg.command
 		let data = msg.data
-        let displayErrorTid = 0
         try {
             // 自定义处理
             switch (action) {
             	// 关闭对话框
             	case "close":
             		dialog.close()
-            		break
-                case "initEnvInfo":
-                	webview.postMessage({
-                		command: "resInitEnvInfo",
-                		data: {
-                	        htmlRoot: path.resolve(__dirname, "html").replaceAll(/\\/g, "/"),
-                            configuration: utils.getConfiguration()
-                	    }
-                	})
-                	break
-            	case "fetchContent":
-            		hx.window.getActiveTextEditor().then(editor => {
-            			const text = editor.document.getText(editor.selection)
-            			webview.postMessage({
-            				command: "resFetchContent",
-            				data: text || "什么都没有选择"
-            			})
-            		})
             		break
             	case "displayError":
             		dialog.displayError(data)
@@ -62,15 +45,17 @@ const _showView = () => {
             		displayErrorTid = setTimeout(() => {
             			dialog.displayError("")
             		}, data.timeout || 3000)
-            		break
-                // 同步保存配置
-                case "syncConfig":
-                    utils.updateConfiguration(data)
-                    webview.postMessage({
-                    	command: "resSyncConfig",
-                    	data: "配置已保存"
-                    })
+            		break 
+                // 通用通信处理
             	default:
+                    processMessage(msg).then(data => {
+                        webview.postMessage({
+                            command: "res" + changeCase.pascalCase(msg.command),
+                            data
+                        })
+                    }).catch(e => {
+                        console.error(`[processMessage error] `, e)
+                    })
             		break
             }
         }

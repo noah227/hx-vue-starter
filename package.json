@@ -13,7 +13,7 @@
 	],
 	"main": "./extension",
 	"scripts": {
-        "build:html": "cd ./src/html && npm run build",
+		"build:html": "cd ./src/html && npm run build",
 		"pack": "node hx-pack.js"
 	},
 	"activationEvents": [
@@ -43,6 +43,7 @@
 		"plugin-manager"
 	],
 	"dependencies": {
+		"change-case-commonjs": "^5.4.4",
 		"hx-vue-dist-loader": "^1.2.5"
 	},
 	"devDependencies": {
