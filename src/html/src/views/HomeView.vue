@@ -122,18 +122,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.home {
-    width: 100%;
-    height: 100%;
-    padding: 16px;
-    box-sizing: border-box;
-    background: linear-gradient(45deg, pink, #0000), linear-gradient(165deg, aqua, #0000), linear-gradient(285deg, pink, #0000);
-    display: flex;
-    flex-direction: column;
-
-    > * {
-        width: fit-content;
-        margin-bottom: 12px;
-    }
-}
+@import "./Home.scss";
 </style>
