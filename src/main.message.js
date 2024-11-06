@@ -40,7 +40,7 @@ const messageHandlers = {
      * 同步保存配置
      * @param {TMessage} msg
      */
-    syncConfig({data}){
+    syncConfig({data}) {
         return new Promise((resolve, reject) => {
             utils.updateConfiguration(data)
             resolve("配置已保存")
