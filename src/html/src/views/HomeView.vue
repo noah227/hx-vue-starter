@@ -122,5 +122,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "./Home.scss";
+@import "./HomeView.scss";
 </style>
